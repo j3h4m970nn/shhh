@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>shhh</title>
+<meta name="description" content="Are you bored? The best spots in Phoenix, picked by locals. Keep it between us.">
+<meta name="theme-color" content="#050607">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<!-- Link previews (what Kelly sees when you text her the URL) -->
+<meta property="og:title" content="shhh">
+<meta property="og:description" content="Are you bored?">
+<meta property="og:type" content="website">
+<!-- Once the site is live, uncomment the next line and put your real URL in it:
+<meta property="og:image" content="https://YOUR-USERNAME.github.io/shhh/assets/face.jpg">
+-->
+<style>*,*::before,*::after{box-sizing:border-box}html,body{margin:0}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap">
+<style>
+  /* Single-look page: Shhh is always black and gold, whatever the viewer's theme. */
+  :root {
+    color-scheme: dark;
+    --onyx: #050607;
+    --matte: #131314;
+    --graphite: #1d1d1f;
+    --gold: #c9a96a;
+    --gold-dark: #8c6b35;
+    --gold-light: #f4e3b5;
+    --champagne: #e9d8ae;
+    --ivory: #efeae0;
+    --dim: #8f8a80;
+    --display: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+    --body: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
+  }
+  html, body { background: var(--onyx); color: var(--ivory); }
+  body {
+    min-height: 100%;
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    padding-inline: 20px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  main {
+    max-width: 30rem;
+    margin-inline: auto;
+    padding-block: 0 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* The face: bleeds into the black on every edge so it has no frame. */
+  .face {
+    width: min(100%, 26rem);
+    aspect-ratio: 768 / 940;
+    max-width: 100%;
+    margin-top: -0.5rem;
+    background: url("assets/face.jpg") center top / cover no-repeat;
+    -webkit-mask-image:
+      linear-gradient(to bottom, transparent 0, #000 12%, #000 72%, transparent 100%),
+      linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to bottom, transparent 0, #000 12%, #000 72%, transparent 100%),
+      linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
+    mask-composite: intersect;
+    animation: rise 2.2s cubic-bezier(.2,.7,.2,1) both;
+  }
+
+  h1 {
+    margin: -2.4rem 0 0;
+    font-family: var(--display);
+    font-weight: 500;
+    font-style: normal;
+    font-size: clamp(4.25rem, 22vw, 6.5rem);
+    line-height: 1;
+    letter-spacing: 0.01em;
+    background: linear-gradient(100deg, var(--gold-dark) 0%, var(--gold) 28%, var(--gold-light) 50%, var(--gold) 70%, var(--gold-dark) 100%);
+    background-size: 220% 100%;
+    background-position: 0% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: fade 1.2s ease 0.9s both, foil 6s ease-in-out 2.2s infinite alternate;
+  }
+
+  .ask {
+    margin: 1.4rem 0 0;
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.9rem;
+    line-height: 1.2;
+    color: var(--champagne);
+    animation: fade 1s ease 1.5s both;
+  }
+
+  .blurb {
+    margin: 1rem 0 0;
+    max-width: 22rem;
+    color: #bdb6a9;
+    font-size: 1rem;
+    text-wrap: pretty;
+    animation: fade 1s ease 1.8s both;
+  }
+
+  .door {
+    margin-top: 2.25rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    animation: fade 1s ease 2.1s both;
+  }
+
+  .knock {
+    appearance: none;
+    cursor: pointer;
+    font: 400 0.78rem/1 var(--body);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    background: linear-gradient(var(--matte), var(--onyx));
+    border: 1px solid var(--gold-dark);
+    border-radius: 999px;
+    padding: 1.05rem 2.1rem 1.05rem 2.42rem; /* extra left pad balances the trailing letter-spacing */
+    transition: border-color .3s ease, box-shadow .3s ease, transform .15s ease;
+  }
+  .knock:hover { border-color: var(--gold); box-shadow: 0 0 28px -6px rgba(201,169,106,.45); }
+  .knock:active { transform: scale(.97); }
+  .knock:focus-visible { outline: 1px solid var(--gold-light); outline-offset: 4px; }
+  .knock.once { animation: rap .32s ease; }
+
+  .hint {
+    margin: 0;
+    min-height: 1.5em;
+    font-size: 0.85rem;
+    color: var(--dim);
+    font-style: italic;
+    font-family: var(--display);
+    font-size: 1.05rem;
+  }
+
+  .inside {
+    width: 100%;
+    display: grid;
+    gap: 0.75rem;
+    animation: fade .8s ease both;
+  }
+  .inside p {
+    margin: 0 0 0.25rem;
+    font-family: var(--display);
+    font-size: 1.35rem;
+    color: var(--champagne);
+  }
+  .stores { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  .store {
+    flex: 1 1 8.5rem;
+    max-width: 13rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--graphite);
+    border-radius: 14px;
+    background: var(--matte);
+    color: var(--ivory);
+    text-align: left;
+    display: grid;
+    gap: 0.1rem;
+  }
+  .store small {
+    font-size: 0.66rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .store span { font-size: 1rem; font-weight: 400; }
+
+  footer {
+    margin-top: 3.5rem;
+    display: grid;
+    gap: 0.4rem;
+    justify-items: center;
+    animation: fade 1s ease 2.4s both;
+  }
+  footer .rule { width: 2.5rem; height: 1px; background: var(--gold-dark); opacity: .7; }
+  footer p {
+    margin: 0;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(14px) scale(1.02); filter: brightness(.4); } to { opacity: 1; transform: none; filter: none; } }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @keyframes foil { from { background-position: 0% 0; } to { background-position: 100% 0; } }
+  @keyframes rap { 0%,100% { transform: none; } 30% { transform: translateX(-3px); } 60% { transform: translateX(3px); } }
+
+  @media (min-width: 720px) {
+    main { padding-top: 1.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+
+</head>
+<body>
+<main>
+  <div class="face" role="img" aria-label="A woman's face in shadow, a finger pressed to her lips"></div>
+
+  <h1>shhh</h1>
+
+  <p class="ask">Are you bored?</p>
+
+  <p class="blurb">Good. The best spots in Phoenix aren't on page one of anything. They're picked by locals who'll tell you why they're good and who makes them that way. Keep it between us.</p>
+
+  <div class="door">
+    <button class="knock" id="knock" type="button">Knock twice</button>
+    <p class="hint" id="hint" aria-live="polite"></p>
+
+    <div class="inside" id="inside" hidden>
+      <p>Come in.</p>
+      <div class="stores">
+        <div class="store"><small>Soon on</small><span>App Store</span></div>
+        <div class="store"><small>Soon on</small><span>Google Play</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="rule"></span>
+    <p>You didn't hear it from us</p>
+  </footer>
+</main>
+
+<script>
+  (function () {
+    var btn = document.getElementById('knock');
+    var hint = document.getElementById('hint');
+    var inside = document.getElementById('inside');
+    var knocks = 0, timer = null;
+
+    btn.addEventListener('click', function () {
+      knocks++;
+      if (knocks === 1) {
+        btn.classList.remove('once'); void btn.offsetWidth; btn.classList.add('once');
+        hint.textContent = 'Once more.';
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          if (knocks === 1) { knocks = 0; hint.textContent = 'Too slow. Try again.'; }
+        }, 4000);
+      } else {
+        clearTimeout(timer);
+        btn.hidden = true;
+        hint.hidden = true;
+        inside.hidden = false;
+      }
+    });
+  })();
+</script>
+</body>
+</html>
